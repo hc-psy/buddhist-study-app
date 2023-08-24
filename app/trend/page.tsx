@@ -3,7 +3,8 @@
 import { useAppSelector } from "@/features/hooks";
 import { selectGeoFilter } from "@/features/filter/filterSlice";
 import VisitLines from "./components/visit-lines";
-
+import LanLines from "./components/lan-lines";
+import VisitBubble from "./components/visit-bubble";
 // import GeoPie from "./components/geo-pie";
 // import FourMetrics from "./components/four-metrics";
 
@@ -43,6 +44,8 @@ export default function TrendPage() {
             </div>
           </div>
           <VisitLines />
+          <LanLines />
+          <VisitBubble />
         </div>
       </div>
     </>

@@ -41,18 +41,22 @@ export default function VisitLines() {
       {
         type: "category",
         boundaryGap: false,
-        data: data?.xAxis,
+        data: data?.week,
       },
     ],
     yAxis: [
       {
-        type: "log",
+        type: "value",
+      },
+      {
+        type: "value",
       },
     ],
     series: [
       {
-        name: "v1",
+        name: "First-Time Visits",
         type: "line",
+        connectNulls: true,
         smooth: true,
         areaStyle: {
           opacity: 0.2,
@@ -60,11 +64,14 @@ export default function VisitLines() {
         emphasis: {
           focus: "series",
         },
-        data: data?.stacked_line_data.v1,
+        data: data?.v1,
       },
       {
-        name: "v2",
+        name: "Revisits",
         type: "line",
+
+        yAxisIndex: 1,
+        connectNulls: true,
         smooth: true,
         areaStyle: {
           opacity: 0.2,
@@ -72,11 +79,12 @@ export default function VisitLines() {
         emphasis: {
           focus: "series",
         },
-        data: data?.stacked_line_data.v2,
+        data: data?.v3,
       },
       {
-        name: "v3",
+        name: "Final Visits",
         type: "line",
+        connectNulls: true,
         smooth: true,
         areaStyle: {
           opacity: 0.2,
@@ -84,11 +92,12 @@ export default function VisitLines() {
         emphasis: {
           focus: "series",
         },
-        data: data?.stacked_line_data.v3,
+        data: data?.v2,
       },
       {
-        name: "v4",
+        name: "One-Time Only Visits",
         type: "line",
+        connectNulls: true,
         smooth: true,
         areaStyle: {
           opacity: 0.2,
@@ -96,16 +105,19 @@ export default function VisitLines() {
         emphasis: {
           focus: "series",
         },
-        data: data?.stacked_line_data.v4,
+        data: data?.v4,
       },
     ],
-    animationEasing: "elasticOut",
   };
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Weekly Visits</CardTitle>
+        <CardTitle>Four Types of Website Visits</CardTitle>
+        <CardDescription>
+          The right Y-axis represents revisits, while the left Y-axis represents
+          other types of visits
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <ReactEcharts
