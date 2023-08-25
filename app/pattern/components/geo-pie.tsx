@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -10,6 +10,7 @@ import {
 import MyMap from "./my-map";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useState } from "react";
 import PiePattern from "./pie-pattern";
 
@@ -29,6 +30,17 @@ const initialSwitchers: Switchers = {
 
 export default function GeoPie({ inspect = "total_user" }) {
   const [switchers, setSwitchers] = useState<Switchers>(initialSwitchers);
+
+  const [shouldRenderMap, setShouldRenderMap] = useState(false);
+
+  useEffect(() => {
+    // 延遲 1 秒後渲染地圖
+    const timer = setTimeout(() => {
+      setShouldRenderMap(true);
+    }, 1200);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const onChangeSwitchers = (value: keyof Switchers) => {
     setSwitchers((prev) => ({
@@ -68,7 +80,11 @@ export default function GeoPie({ inspect = "total_user" }) {
           </RadioGroup>
         </CardHeader>
         <CardContent className="w-[95%] h-[700px] p-0 mx-auto mb-2 rounded-2xl overflow-clip">
-          <MyMap inspect={inspect} switchers={switchers} />
+          {shouldRenderMap ? (
+            <MyMap inspect={inspect} switchers={switchers} />
+          ) : (
+            <Skeleton className="w-full h-full" />
+          )}
         </CardContent>
       </Card>
       <Card className="col-span-3">

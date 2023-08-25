@@ -5,6 +5,7 @@ import { selectGeoFilter } from "@/features/filter/filterSlice";
 import VisitLines from "./components/visit-lines";
 import LanLines from "./components/lan-lines";
 import VisitBubble from "./components/visit-bubble";
+import { Sidebar } from "./components/sidebar";
 // import GeoPie from "./components/geo-pie";
 // import FourMetrics from "./components/four-metrics";
 
@@ -43,9 +44,20 @@ export default function TrendPage() {
               <p className="text-sm text-muted-foreground my-2">{desc}</p>
             </div>
           </div>
-          <VisitLines />
-          <LanLines />
-          <VisitBubble />
+          <div className="border-t">
+            <div className="bg-background">
+              <div className="grid grid-cols-3 lg:grid-cols-5">
+                <Sidebar className="hidden lg:block" />
+                <div className="col-span-3 lg:col-span-4 lg:border-l">
+                  <div className="h-full px-4 py-6 lg:px-8">
+                    <VisitLines />
+                    <LanLines />
+                    <VisitBubble />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

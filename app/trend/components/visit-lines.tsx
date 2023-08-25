@@ -111,7 +111,7 @@ export default function VisitLines() {
   };
 
   return (
-    <Card>
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>Four Types of Website Visits</CardTitle>
         <CardDescription>

@@ -12,6 +12,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { WebMercatorViewport } from "@deck.gl/core/typed";
 import { COUNTRYBOUNDS } from "@/data/country-by-geo-coordinates";
+import React from "react";
 
 function getCountryBounds(countryName: string) {
   // Convert the input to lowercase
@@ -53,6 +54,7 @@ interface IData {
 }
 
 function aggregateData(data: IData[]): IData[] {
+  console.time("myFunction execution time");
   const result: { [key: string]: IData } = data.reduce(
     (acc: { [key: string]: IData }, cur) => {
       const key = `${cur.lon},${cur.lat}`; // Unique key for each lon, lat pair
@@ -72,10 +74,11 @@ function aggregateData(data: IData[]): IData[] {
     {}
   );
 
+  console.timeEnd("myFunction execution time");
   return Object.values(result);
 }
 
-export default function MyMap({
+function MyMap({
   inspect = "total_user",
   switchers = { jp: false, en: false, tw: false, agg: true },
   intensity = 4,
@@ -84,10 +87,10 @@ export default function MyMap({
   mapStyle = MAP_STYLE,
 }) {
   const geoFilter = useAppSelector(selectGeoFilter);
-  const { currentData, isLoading } = useGetUuserUclickGeoQuery(
+  const { currentData: data, isLoading } = useGetUuserUclickGeoQuery(
     geoFilter as GeoFilterInfo
   );
-  const { geo_metrics_id: data } = currentData || {};
+
   const containerRef = useRef<HTMLDivElement>(null);
   const [viewport, setViewport] = useState({
     longitude: 0,
@@ -137,23 +140,25 @@ export default function MyMap({
   }, [containerRef.current, data]);
 
   // AggData is computed using useMemo at the top level of the component
-  const AggData = useMemo(() => (data ? aggregateData(data) : []), [data]);
-  const JpData = useMemo(
-    () => (data ? data.filter((d) => d.lan === "jp") : []),
-    [data]
-  );
-  const EnData = useMemo(
-    () => (data ? data.filter((d) => d.lan === "en") : []),
-    [data]
-  );
-  const TwData = useMemo(
-    () => (data ? data.filter((d) => d.lan === "tw") : []),
-    [data]
-  );
+  // const AggData = useMemo(() => (data ? aggregateData(data) : []), [data]);
+  // console.time("data");
+  // const JpData = useMemo(
+  //   () => (data ? data.filter((d) => d.lan === "jp") : []),
+  //   [data]
+  // );
+  // const EnData = useMemo(
+  //   () => (data ? data.filter((d) => d.lan === "en") : []),
+  //   [data]
+  // );
+  // const TwData = useMemo(
+  //   () => (data ? data.filter((d) => d.lan === "tw") : []),
+  //   [data]
+  // );
+  // console.timeEnd("data");
 
   const jpLayer = useMemo(() => {
     return new HeatmapLayer({
-      data: JpData,
+      data: data?.jp_data,
       id: "heatmp-layer-jp",
       pickable: false,
       getPosition: (d) => [d.lon, d.lat],
@@ -171,11 +176,11 @@ export default function MyMap({
       ],
       visible: switchers.jp,
     });
-  }, [JpData, switchers.jp]);
+  }, [data?.jp_data, switchers.jp, inspect]);
 
   const enLayer = useMemo(() => {
     return new HeatmapLayer({
-      data: EnData,
+      data: data?.en_data,
       id: "heatmp-layer-en",
       pickable: false,
       getPosition: (d) => [d.lon, d.lat],
@@ -193,11 +198,11 @@ export default function MyMap({
       ],
       visible: switchers.en,
     });
-  }, [EnData, switchers.en]);
+  }, [data?.en_data, switchers.en, inspect]);
 
   const twLayer = useMemo(() => {
     return new HeatmapLayer({
-      data: TwData,
+      data: data?.tw_data,
       id: "heatmp-layer-tw",
       pickable: false,
       getPosition: (d) => [d.lon, d.lat],
@@ -215,11 +220,11 @@ export default function MyMap({
       ],
       visible: switchers.tw,
     });
-  }, [TwData, switchers.tw]);
+  }, [data?.tw_data, switchers.tw, inspect]);
 
   const aggLayer = useMemo(() => {
     return new HeatmapLayer({
-      data: AggData,
+      data: data?.agg_data,
       id: "heatmp-layer-agg",
       pickable: false,
       getPosition: (d) => [d.lon, d.lat],
@@ -229,7 +234,7 @@ export default function MyMap({
       threshold,
       visible: switchers.agg,
     });
-  }, [AggData, switchers.agg]);
+  }, [data?.agg_data, switchers.agg, inspect]);
 
   if (isLoading || !data) return <Skeleton className="w-full h-full" />;
 
@@ -249,3 +254,5 @@ export default function MyMap({
     </div>
   );
 }
+
+export default React.memo(MyMap);

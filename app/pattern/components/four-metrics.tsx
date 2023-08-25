@@ -8,26 +8,15 @@ import type { GeoFilterInfo } from "@/types/filter";
 import { METRICS, METRICSTOTAL } from "@/data/metrics";
 import { Skeleton } from "@/components/ui/skeleton";
 import _ from "lodash";
+import { useState, useEffect } from "react";
 
 interface IData {
-  id: number;
   lon: number;
   lat: number;
   lan: string;
   total_click: number;
   total_user: number;
   total_book: number;
-}
-
-function formatNumber(numerator: number, denominator: number) {
-  const result = numerator / denominator;
-
-  if (result < 1) {
-    return "<1";
-  } else {
-    const roundedResult = Math.round(result);
-    return roundedResult.toLocaleString();
-  }
 }
 
 const median = (array: number[]) => {
@@ -58,20 +47,38 @@ export default function FourMetrics({
   const list = METRICS[metrics_idx as keyof typeof METRICS];
   const total = METRICSTOTAL[metrics_idx as keyof typeof METRICSTOTAL];
 
+  const [isRecalculating, setRecalculating] = useState(false);
+  const [sum, setSum] = useState(0);
+  const [percentage, setPercentage] = useState("0%");
+  const [meanResult, setMeanResult] = useState("0");
+  const [medianResult, setMedianResult] = useState("0");
+
   const geoFilter = useAppSelector(selectGeoFilter);
   const { currentData, isLoading } = useGetUuserUclickGeoQuery(
     geoFilter as GeoFilterInfo
   );
-  const { geo_metrics_id: data } = currentData || {};
+  const { agg_data: data } = currentData || {};
   const filteredData = _.map(data, inspect as keyof IData);
 
-  const sum = _.sum(filteredData);
+  useEffect(() => {
+    setRecalculating(true); // Set flag to indicate recalculation
 
-  const percentage = formatPercentage(sum, total);
-  const mean_result = _.mean(filteredData).toFixed(2).toLocaleString();
-  const median_result = median(filteredData as number[])
-    .toFixed(0)
-    .toLocaleString();
+    const newSum = _.sum(filteredData);
+    setSum(newSum); // Update state
+
+    const newPercentage = formatPercentage(newSum, total);
+    setPercentage(newPercentage); // Update state
+
+    const newMeanResult = _.mean(filteredData).toFixed(2).toLocaleString();
+    setMeanResult(newMeanResult); // Update state
+
+    const newMedianResult = median(filteredData as number[])
+      .toFixed(0)
+      .toLocaleString();
+    setMedianResult(newMedianResult); // Update state
+
+    setRecalculating(false); // Reset flag
+  }, [data, metrics_idx, inspect, geoFilter]);
 
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -94,7 +101,7 @@ export default function FourMetrics({
           </svg>
         </CardHeader>
         <CardContent>
-          {!isLoading && data ? (
+          {!isLoading && data && !isRecalculating ? (
             <div className="text-2xl font-bold">{sum.toLocaleString()}</div>
           ) : (
             <Skeleton className="w-2/3 h-8" />
@@ -121,7 +128,7 @@ export default function FourMetrics({
           </svg>
         </CardHeader>
         <CardContent>
-          {!isLoading && data ? (
+          {!isLoading && data && !isRecalculating ? (
             <div className="text-2xl font-bold">{percentage}</div>
           ) : (
             <Skeleton className="w-2/3 h-8" />
@@ -148,8 +155,8 @@ export default function FourMetrics({
           </svg>
         </CardHeader>
         <CardContent>
-          {!isLoading && data ? (
-            <div className="text-2xl font-bold">{mean_result}</div>
+          {!isLoading && data && !isRecalculating ? (
+            <div className="text-2xl font-bold">{meanResult}</div>
           ) : (
             <Skeleton className="w-2/3 h-8" />
           )}
@@ -173,8 +180,8 @@ export default function FourMetrics({
           </svg>
         </CardHeader>
         <CardContent>
-          {!isLoading && data ? (
-            <div className="text-2xl font-bold">{median_result}</div>
+          {!isLoading && data && !isRecalculating ? (
+            <div className="text-2xl font-bold">{medianResult}</div>
           ) : (
             <Skeleton className="w-2/3 h-8" />
           )}
