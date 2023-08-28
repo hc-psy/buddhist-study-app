@@ -1,7 +1,5 @@
 import ReactEcharts from "echarts-for-react";
 
-import { useEffect, useRef } from "react";
-
 import {
   Card,
   CardContent,
@@ -82,7 +80,7 @@ export default function LanLines() {
       {},
     ],
     series: Object.keys(data?.lan || {}).map((key) => ({
-      name: key,
+      name: key.toUpperCase(),
       connectNulls: true,
       type: "line",
       stack: "total",
@@ -101,6 +99,12 @@ export default function LanLines() {
     <Card>
       <CardHeader>
         <CardTitle>Weekly Visits</CardTitle>
+        <CardDescription>
+          This stacked line graph shows weekly visits, broken down by language.
+          Hover over the data to see language-specific and total visit counts.
+          The X-axis represents the week, and the Y-axis shows the number of
+          visits
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <ReactEcharts

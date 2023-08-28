@@ -33,6 +33,13 @@ export default function VisitBubble() {
     opacity: 0.8,
   };
 
+  const PLACE =
+    geoFilter?.country !== "All Countries"
+      ? geoFilter?.country
+      : geoFilter?.continent !== "All Continents"
+      ? geoFilter?.continent
+      : "Worldwide";
+
   const sizeFunction = function (x: number) {
     if (x === 0) {
       return 0;
@@ -42,9 +49,14 @@ export default function VisitBubble() {
 
   // Schema:
   const schema = [
-    { name: "Income", index: 0, text: "人均收入", unit: "美元" },
-    { name: "LifeExpectancy", index: 1, text: "人均寿命", unit: "岁" },
-    { name: "Population", index: 2, text: "总人口", unit: "" },
+    {
+      name: "First-Time Visits",
+      index: 0,
+      text: "First-Time Visits",
+      unit: "美元",
+    },
+    { name: "Final Visits", index: 1, text: "Final Visits", unit: "岁" },
+    { name: "Revisits", index: 2, text: "Revisit", unit: "" },
     { name: "Country", index: 3, text: "Region", unit: "" },
   ];
 
@@ -76,10 +88,12 @@ export default function VisitBubble() {
         {
           text: data.week[0],
           textAlign: "center",
-          right: "10%",
-          top: "50%",
+          right: "5%",
+          top: "70%",
           textStyle: {
-            fontSize: 20,
+            fontSize: 60,
+            fontFamily: "monospace",
+            fontWeight: "bolder",
           },
         },
       ],
@@ -90,8 +104,8 @@ export default function VisitBubble() {
           var value = obj.value;
           // prettier-ignore
           return schema[3].text + '：' + value[3] + '<br>'
-                        + schema[1].text + '：' + value[1] + schema[1].unit + '<br>'
-                        + schema[0].text + '：' + value[0] + schema[0].unit + '<br>'
+                        + schema[0].text + '：' + value[0] + '<br>'
+                        + schema[1].text + '：' + value[1] + '<br>'
                         + schema[2].text + '：' + value[2] + '<br>';
         },
       },
@@ -103,16 +117,16 @@ export default function VisitBubble() {
       },
       xAxis: {
         type: "log",
-        name: "人均收入",
+        name: "First-Time Visits",
         max: Math.max(
           ...[].concat(...data.sib.map((d: any) => d.v1)),
           ...data.v1
         ),
         min: 1,
-        nameGap: 25,
+        nameGap: 40,
         nameLocation: "middle",
         nameTextStyle: {
-          fontSize: 18,
+          fontSize: 15,
         },
         splitLine: {
           show: false,
@@ -120,14 +134,18 @@ export default function VisitBubble() {
       },
       yAxis: {
         type: "log",
-        name: "平均寿命",
+        name: "Final Visits",
+        nameRotate: 90,
+        nameGap: 40,
+        nameLocation: "middle",
         max: Math.max(
           ...[].concat(...data.sib.map((d: any) => d.v2)),
           ...data.v2
         ),
         min: 1,
         nameTextStyle: {
-          fontSize: 18,
+          fontSize: 15,
+          align: "center",
         },
         splitLine: {
           show: false,
@@ -137,7 +155,7 @@ export default function VisitBubble() {
         {
           show: false,
           dimension: 3,
-          categories: [...data.sib.map((d: any) => d.place), "place"],
+          categories: [...data.sib.map((d: any) => d.place), PLACE],
           inRange: {
             color: (function () {
               // prettier-ignore
@@ -187,7 +205,7 @@ export default function VisitBubble() {
             d.place,
             dtime,
           ]),
-          [data.v1[index], data.v2[index], data.v3[index], "place", dtime],
+          [data.v1[index], data.v2[index], data.v3[index], PLACE, dtime],
         ],
         symbolSize: function (val: Array<any>) {
           return sizeFunction(val[2]);
@@ -199,10 +217,13 @@ export default function VisitBubble() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Four Types of Website Visits</CardTitle>
+        <CardTitle>Visit Types Across Regions: A Comparative View</CardTitle>
         <CardDescription>
-          The right Y-axis represents revisits, while the left Y-axis represents
-          other types of visits
+          The dynamics of first-time visits, final visits, and revisits across
+          different regions. The X-axis represents first-time visits, the Y-axis
+          shows final visits, and the size of each bubble indicates the volume
+          of revisits. Use the week control bar on the right to see changes over
+          time. Hover over bubbles to reveal detailed data for each region
         </CardDescription>
       </CardHeader>
       <CardContent>

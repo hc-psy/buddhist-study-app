@@ -94,7 +94,15 @@ export const geoApi = api.injectEndpoints({
         `/getWeeklyGeo/?reqContinent=${obj.continent}&reqCountry=${obj.country}`,
       providesTags: ["Geo"],
     }),
+    getWeeklyMap: build.query({
+      query: () => "/getWeeklyMap/",
+      providesTags: ["Geo"],
+    }),
   }),
 });
 
-export const { useGetUuserUclickGeoQuery, useGetWeeklyGeoQuery } = geoApi;
+export const {
+  useGetUuserUclickGeoQuery,
+  useGetWeeklyGeoQuery,
+  useGetWeeklyMapQuery,
+} = geoApi;

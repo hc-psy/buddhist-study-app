@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/popover";
 
 import { LOCATIONS } from "@/data/locations";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
 
 type PopoverTriggerProps = React.ComponentPropsWithoutRef<
   typeof PopoverTrigger
@@ -118,35 +119,38 @@ export default function LocationSwitcher({ className }: LocationSwitcherProps) {
         <PopoverContent className="w-[200px] p-0">
           <Command>
             <CommandList>
-              <CommandInput placeholder="Search country..." />
-              <CommandEmpty>No country found.</CommandEmpty>
-              <CommandGroup>
-                {LOCATIONS.continents
-                  .filter((entry) => entry.continent === selectedContinent)[0]
-                  .countries.map((entry) => (
-                    <CommandItem
-                      key={entry.country}
-                      onSelect={() => {
-                        setSelectedCountry(entry.country);
-                        setSelectedCity(
-                          entry.cities[entry.cities.length - 1].city
-                        );
-                        setOpenCountry(false);
-                      }}
-                      className="text-sm"
-                    >
-                      {entry.country}
-                      <CheckIcon
-                        className={cn(
-                          "ml-auto h-4 w-4",
-                          selectedCountry === entry.country
-                            ? "opacity-100"
-                            : "opacity-0"
-                        )}
-                      />
-                    </CommandItem>
-                  ))}
-              </CommandGroup>
+              <ScrollArea className="h-96">
+                <CommandInput placeholder="Search country..." />
+
+                <CommandEmpty>No country found.</CommandEmpty>
+                <CommandGroup>
+                  {LOCATIONS.continents
+                    .filter((entry) => entry.continent === selectedContinent)[0]
+                    .countries.map((entry) => (
+                      <CommandItem
+                        key={entry.country}
+                        onSelect={() => {
+                          setSelectedCountry(entry.country);
+                          setSelectedCity(
+                            entry.cities[entry.cities.length - 1].city
+                          );
+                          setOpenCountry(false);
+                        }}
+                        className="text-sm"
+                      >
+                        {entry.country}
+                        <CheckIcon
+                          className={cn(
+                            "ml-auto h-4 w-4",
+                            selectedCountry === entry.country
+                              ? "opacity-100"
+                              : "opacity-0"
+                          )}
+                        />
+                      </CommandItem>
+                    ))}
+                </CommandGroup>
+              </ScrollArea>
             </CommandList>
           </Command>
         </PopoverContent>

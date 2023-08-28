@@ -84,6 +84,7 @@ export function QuickSettingsDrawer() {
           <ArrowRightIcon className="ml-1 h-4 w-4" />
         </div>
       </SheetTrigger>
+
       <SheetContent>
         <SheetHeader>
           <SheetTitle>Quick Settings</SheetTitle>

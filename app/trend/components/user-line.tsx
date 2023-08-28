@@ -14,7 +14,7 @@ import { selectGeoFilter } from "@/features/filter/filterSlice";
 import type { GeoFilterInfo } from "@/types/filter";
 import _ from "lodash";
 
-export default function VisitLines() {
+export default function UserLine() {
   const geoFilter = useAppSelector(selectGeoFilter);
   const { currentData: data, isLoading } = useGetWeeklyGeoQuery(
     geoFilter as GeoFilterInfo
@@ -34,7 +34,7 @@ export default function VisitLines() {
     grid: {
       left: "3%",
       right: "4%",
-      bottom: "20%",
+      bottom: "3%",
       containLabel: true,
     },
     xAxis: [
@@ -48,19 +48,10 @@ export default function VisitLines() {
       {
         type: "value",
       },
-      {
-        type: "value",
-      },
-    ],
-    dataZoom: [
-      {
-        type: "inside",
-      },
-      {},
     ],
     series: [
       {
-        name: "First-Time Visits",
+        name: "Users",
         type: "line",
         connectNulls: true,
         smooth: true,
@@ -70,59 +61,18 @@ export default function VisitLines() {
         emphasis: {
           focus: "series",
         },
-        data: data?.v1,
-      },
-      {
-        name: "Revisits",
-        type: "line",
-
-        yAxisIndex: 1,
-        connectNulls: true,
-        smooth: true,
-        areaStyle: {
-          opacity: 0.2,
-        },
-        emphasis: {
-          focus: "series",
-        },
-        data: data?.v3,
-      },
-      {
-        name: "Final Visits",
-        type: "line",
-        connectNulls: true,
-        smooth: true,
-        areaStyle: {
-          opacity: 0.2,
-        },
-        emphasis: {
-          focus: "series",
-        },
-        data: data?.v2,
-      },
-      {
-        name: "One-Time Only Visits",
-        type: "line",
-        connectNulls: true,
-        smooth: true,
-        areaStyle: {
-          opacity: 0.2,
-        },
-        emphasis: {
-          focus: "series",
-        },
-        data: data?.v4,
+        data: data?.total_users,
       },
     ],
   };
 
   return (
-    <Card className="w-full my-4">
+    <Card className="w-full">
       <CardHeader>
-        <CardTitle>Four Types of Visits</CardTitle>
+        <CardTitle>Weekly Unique User</CardTitle>
         <CardDescription>
-          The right Y-axis represents revisits, while the left Y-axis represents
-          other types of visits
+          This graph shows weekly unique users in the selected region. The
+          X-axis represents the week, and the Y-axis counts unique IPs
         </CardDescription>
       </CardHeader>
       <CardContent>
