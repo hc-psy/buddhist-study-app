@@ -37,8 +37,8 @@ export default function WeeklyCloud() {
 
   const data = useMemo(() => {
     if (currentData) {
-      console.log("computed");
-      return currentData.week.map((week: string, index: number) => {
+      console.time("computed");
+      const weekData = currentData.week.map((week: string, index: number) => {
         return currentData.book
           .filter((item: any) => item.value[index] > 0)
           .map((item: any) => {
@@ -48,6 +48,18 @@ export default function WeeklyCloud() {
             };
           });
       });
+
+      const allData = currentData.book
+        .map((item: any) => {
+          return {
+            text: item.name,
+            value: item.value.reduce((a: number, b: number) => a + b, 0),
+          };
+        })
+        .filter((item: any) => item.value > 0);
+
+      console.timeEnd("computed");
+      return [...weekData, allData];
     }
   }, [currentData]);
 
@@ -56,8 +68,8 @@ export default function WeeklyCloud() {
   const [val, setVal] = useState<any>(week?.[0]);
 
   useEffect(() => {
-    const index = week.indexOf(val);
-    setWords(data[index]);
+    const index = [...week, "All"].indexOf(val);
+    setWords(data?.[index]);
   }, [val]);
 
   const onValueChange = (value: string) => {
@@ -90,7 +102,7 @@ export default function WeeklyCloud() {
               </SelectTrigger>
               <SelectContent className="h-[300px]">
                 <ScrollArea>
-                  {week.map((item: string) => (
+                  {[...week, "All"].map((item: string) => (
                     <SelectItem key={item} value={item}>
                       {item}
                     </SelectItem>
@@ -98,7 +110,9 @@ export default function WeeklyCloud() {
                 </ScrollArea>
               </SelectContent>
             </Select>
-            <div className="h-[375px] my-2">
+            <div
+              className={val === "All" ? "h-[900px] my-2" : "h-[400px] my-2"}
+            >
               <ReactWordcloud words={words} options={options} />
             </div>
           </>

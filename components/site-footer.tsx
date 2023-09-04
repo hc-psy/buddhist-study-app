@@ -7,7 +7,7 @@ export function SiteFooter() {
         <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
           Built by{" "}
           <a
-            href={siteConfig.links.twitter}
+            href={siteConfig.links.github}
             target="_blank"
             rel="noreferrer"
             className="font-medium underline underline-offset-4"
@@ -16,7 +16,7 @@ export function SiteFooter() {
           </a>
           . Copyright © 2023{" "}
           <a
-            href={siteConfig.links.github}
+            href={siteConfig.links.website}
             target="_blank"
             rel="noreferrer"
             className="font-medium underline underline-offset-4"

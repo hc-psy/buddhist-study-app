@@ -139,23 +139,6 @@ function MyMap({
     }
   }, [containerRef.current, data]);
 
-  // AggData is computed using useMemo at the top level of the component
-  // const AggData = useMemo(() => (data ? aggregateData(data) : []), [data]);
-  // console.time("data");
-  // const JpData = useMemo(
-  //   () => (data ? data.filter((d) => d.lan === "jp") : []),
-  //   [data]
-  // );
-  // const EnData = useMemo(
-  //   () => (data ? data.filter((d) => d.lan === "en") : []),
-  //   [data]
-  // );
-  // const TwData = useMemo(
-  //   () => (data ? data.filter((d) => d.lan === "tw") : []),
-  //   [data]
-  // );
-  // console.timeEnd("data");
-
   const jpLayer = useMemo(() => {
     return new HeatmapLayer({
       data: data?.jp_data,

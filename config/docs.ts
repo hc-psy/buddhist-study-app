@@ -8,22 +8,20 @@ interface DocsConfig {
 export const docsConfig: DocsConfig = {
   mainNav: [
     {
-      title: "Documentation",
-      href: "/docs",
+      title: "Pattern",
+      href: "/pattern",
     },
     {
-      title: "Blog",
-      href: "/docs/components/accordion",
+      title: "Trend",
+      href: "/trend",
     },
     {
-      title: "GitHub",
-      href: "https://github.com/shadcn/ui",
-      external: true,
+      title: "Network",
+      href: "/network",
     },
     {
-      title: "Twitter",
-      href: "https://twitter.com/shadcn",
-      external: true,
+      title: "Settings",
+      href: "/settings",
     },
   ],
   sidebarNav: [

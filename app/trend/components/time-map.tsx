@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 
 import { Map } from "react-map-gl/maplibre";
-import maplibregl from "maplibre-gl";
+
 import DeckGL from "@deck.gl/react/typed";
 import { ScatterplotLayer } from "@deck.gl/layers/typed";
 import { DataFilterExtension } from "@deck.gl/extensions/typed";
@@ -101,8 +101,15 @@ export default function WeeklyMap({ mapStyle = MAP_STYLE }) {
   return (
     <>
       <Card className="my-4">
-        <CardHeader className="flex flex-row justify-between items-center">
-          <CardTitle>Geographical Representation</CardTitle>
+        <CardHeader>
+          <CardTitle>Geolocated User Activity Over Time</CardTitle>
+          <CardDescription>
+            This interactive map visualizes user engagement by plotting IP
+            locations. The size of each point indicates the activity level of
+            the corresponding IP. Use the time-range slider below the map to
+            filter IP activity between two time points. For an automated view,
+            press the Play button next to the slider to advance the time range
+          </CardDescription>
         </CardHeader>
         <CardContent className="w-[95%] h-[400px] p-0 mx-auto mb-2 rounded-2xl overflow-clip">
           <div className="relative w-full h-full">

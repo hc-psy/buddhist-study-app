@@ -4,7 +4,7 @@ export const metadata: Metadata = {
   description: "",
 };
 
-export default function PatternLayout({
+export default function NetworkLayout({
   children,
 }: {
   children: React.ReactNode;

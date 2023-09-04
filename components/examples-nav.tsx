@@ -18,6 +18,10 @@ const examples = [
     href: "/trend",
   },
   {
+    name: "Network",
+    href: "/network",
+  },
+  {
     name: "Settings",
     href: "/settings",
   },

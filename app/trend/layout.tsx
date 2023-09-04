@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Example dashboard app using the components.",
+  title: "BuddhiLab: User Study of Digital Library of Buddhist Studies",
+  description: "",
 };
 
 export default function TrendLayout({
