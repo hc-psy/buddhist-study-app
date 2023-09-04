@@ -42,8 +42,10 @@ export function SearchMenu({ setBook }: props) {
     setSearchString("");
   }, [open]);
 
-  const onChange = (value: string) => {
-    setSearchString(value);
+  const handleKeyDown = (event: any) => {
+    if (event.key === "Enter") {
+      setSearchString(event.target.value);
+    }
   };
 
   return (
@@ -60,14 +62,20 @@ export function SearchMenu({ setBook }: props) {
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <CommandInput
-          placeholder="Type and search..."
-          onValueChange={onChange}
+          placeholder="Search and Press Enter"
+          // onValueChange={onChange}
+          onKeyDown={handleKeyDown}
         />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
+          {isLoading ? (
+            <Command.Loading>
+              <div className="block py-2 text-center">Hang on…</div>
+            </Command.Loading>
+          ) : (
+            <CommandEmpty>No results found.</CommandEmpty>
+          )}
           {data && data.length > 0 && searchString != "" && (
             <CommandGroup>
-              {isLoading && <Command.Loading>Hang on…</Command.Loading>}
               {data.map((navItem: any) => (
                 <CommandItem
                   key={navItem.book_id}

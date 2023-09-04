@@ -3,7 +3,7 @@ import { RootState } from "../store";
 
 // Create our baseQuery instance
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:8000",
+  baseUrl: "https://buddhist-study-api.onrender.com/",
   prepareHeaders: (headers) => {
     // By default, if we have a token in the store, let's use that for authenticated requests
     // headers.set("content-type", "application/json");
