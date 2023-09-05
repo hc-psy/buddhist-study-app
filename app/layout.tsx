@@ -42,13 +42,15 @@ export default function RootLayout({
                 <div className="container relative">
                   <PageHeader className="pb-8">
                     <PageHeaderHeading>
-                      Discover the users of buddhist libraries.
+                      User Studies of the NTU Digital Library of Buddhist
+                      Studies
                     </PageHeaderHeading>
                     <PageHeaderDescription>
                       Analyze, understand, and connect with user behaviors in
-                      the NTU Digital Library of Buddhist Studies with
-                      AI-powered technologies. Interactive. Customizable.
-                      Enlightening.
+                      the NTU Digital Library of Buddhist Studies (DLBS) with
+                      AI-powered technologies, sourced from a DLBS dataset of 8
+                      million browsing logs from March to September 2022.
+                      Interactive. Customizable. Enlightening.
                     </PageHeaderDescription>
                   </PageHeader>
                   <ExamplesNav />
