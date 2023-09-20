@@ -53,11 +53,13 @@ export function SearchMenu({ setBook }: props) {
       <Button
         variant="outline"
         className={cn(
-          "relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64"
+          "relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-[20rem]"
         )}
         onClick={() => setOpen(true)}
       >
-        <span className="hidden lg:inline-flex">Search Bibliography...</span>
+        <span className="hidden lg:inline-flex">
+          Search Bibliographic Record...
+        </span>
         <span className="inline-flex lg:hidden">Search...</span>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>

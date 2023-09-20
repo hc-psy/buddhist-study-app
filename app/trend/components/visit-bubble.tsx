@@ -86,12 +86,12 @@ export default function VisitBubble() {
       },
       title: [
         {
-          text: data.week[0],
+          text: "2022-" + data.week[0],
           textAlign: "center",
-          right: "5%",
+          right: "1%",
           top: "70%",
           textStyle: {
-            fontSize: 60,
+            fontSize: 40,
             fontFamily: "monospace",
             fontWeight: "bolder",
           },
@@ -191,7 +191,7 @@ export default function VisitBubble() {
     options: data.week.map((dtime: string, index: number) => ({
       title: {
         show: true,
-        text: dtime + "",
+        text: "2022-" + dtime + "",
       },
       series: {
         name: dtime,

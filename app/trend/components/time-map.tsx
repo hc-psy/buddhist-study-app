@@ -102,7 +102,7 @@ export default function WeeklyMap({ mapStyle = MAP_STYLE }) {
     <>
       <Card className="my-4">
         <CardHeader>
-          <CardTitle>Geolocated User Activity Over Time</CardTitle>
+          <CardTitle>Geolocated IP Activity Over Time</CardTitle>
           <CardDescription>
             This interactive map visualizes user engagement by plotting IP
             locations. The size of each point indicates the activity level of

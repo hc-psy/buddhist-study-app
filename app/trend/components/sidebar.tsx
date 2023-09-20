@@ -32,7 +32,7 @@ export function Sidebar({ className = "", focus, setFocus }: props) {
                 <circle cx="12" cy="12" r="10" />
                 <polygon points="10 8 16 12 10 16 10 8" />
               </svg>
-              User
+              IP
             </Button>
             <Button
               variant={focus === 1 ? "secondary" : "ghost"}

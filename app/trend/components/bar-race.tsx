@@ -111,11 +111,11 @@ export default function BarRace() {
       elements: [
         {
           type: "text",
-          right: 160,
+          right: 60,
           bottom: 60,
           style: {
-            text: data?.week[0] || "",
-            font: "bolder 80px monospace",
+            text: "2022-" + data?.week[0] || "",
+            font: "bolder 40px monospace",
             fill: "rgba(100, 100, 100, 0.25)",
           },
           z: 100,
@@ -174,7 +174,7 @@ export default function BarRace() {
             data?.week[index],
           ]);
           option.series[0].data = source;
-          option.graphic[0].elements[0].style.text = week;
+          option.graphic[0].elements[0].style.text = "2022-" + week;
           chart.setOption(option);
           await sleep(updateFrequency);
         };
@@ -198,11 +198,13 @@ export default function BarRace() {
   return (
     <Card className="my-4">
       <CardHeader>
-        <CardTitle>Weekly Top 10 Bibliographies: A Racing View</CardTitle>
+        <CardTitle>
+          Weekly Top 10 bibliographic records: A Racing View
+        </CardTitle>
         <CardDescription>
-          This graph dynamically shows the top 10 most-referenced bibliographies
-          week-by-week. Watch as different titles compete for the top spot,
-          giving you real-time insight into shifting trends in bibliographies
+          This graph dynamically shows the top 10 most-referenced bibliographic
+          records week-by-week. Watch as different titles compete for the top
+          spot, giving you real-time insight into shifting trends in record
           browsed counts
         </CardDescription>
       </CardHeader>

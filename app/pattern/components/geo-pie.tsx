@@ -67,7 +67,7 @@ export default function GeoPie({ inspect = "total_user" }) {
             </div>
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="tw" id="r1" />
-              <Label htmlFor="r1">TW</Label>
+              <Label htmlFor="r1">CN</Label>
             </div>
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="en" id="r1" />

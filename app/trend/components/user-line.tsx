@@ -51,7 +51,7 @@ export default function UserLine() {
     ],
     series: [
       {
-        name: "Users",
+        name: "IPs",
         type: "line",
         connectNulls: true,
         smooth: true,
@@ -69,10 +69,10 @@ export default function UserLine() {
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle>Weekly Unique User</CardTitle>
+        <CardTitle>Weekly Unique IP</CardTitle>
         <CardDescription>
-          This graph shows weekly unique users in the selected region. The
-          X-axis represents the week, and the Y-axis counts unique IPs
+          This graph shows weekly unique IPs in the selected region. The X-axis
+          represents the week, and the Y-axis counts unique IPs
         </CardDescription>
       </CardHeader>
       <CardContent>

@@ -40,7 +40,7 @@ export default function NetworkPage() {
                             <h3 className="text-xl font-bold tracking-tight">
                               {book.original_topic
                                 ? book.original_topic
-                                : "Please select a book"}
+                                : "Please select a bibliographic record"}
                             </h3>
                             <SearchMenu setBook={setBook} />
                           </div>

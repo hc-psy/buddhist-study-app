@@ -108,14 +108,15 @@ export default function UserNetwork({ strokeWidth = 1, mapStyle = MAP_STYLE }) {
       <Card className="my-4">
         <CardHeader>
           <CardTitle>
-            Interactive Map of Book-Driven User Relationships
+            Interactive Map of Bibliographic Record-Driven IP Relationships
           </CardTitle>
           <CardDescription>
-            Each orange point on this map represents a user, located based on
-            their geographic coordinates. Click on a point to explore users with
-            similar book interactions. Arcs will appear, connecting the selected
-            user to similar users; the greener the arc, the higher the
-            similarity based on user-book interactions
+            Each orange point on this map represents an IP address, located
+            based on their geographic coordinates. Click on a point to explore
+            IPs with similar bibliographic record interactions. Arcs will
+            appear, connecting the selected IP address to similar IPs; the
+            greener the arc, the higher the similarity based on IP-bibliographic
+            record interactions
           </CardDescription>
         </CardHeader>
         <CardContent className="w-[95%] h-[400px] p-0 mx-auto mb-2 rounded-2xl overflow-clip">

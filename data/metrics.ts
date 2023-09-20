@@ -28,22 +28,21 @@ export const METRICSTOTAL: METRICSTOTALTYPE = {
 export const METRICS: METRICSTYPE = {
   user: [
     {
-      title: "Total Unique Users",
+      title: "Total Unique IPs",
+      description: "The count of unique IP addresses",
+    },
+    {
+      title: "IP Percentage",
       description:
-        "The count of unique users, identified by distinct IP addresses",
+        "The proportion of IP addresses in this region compared to the total worldwide IP addresses",
     },
     {
-      title: "User Percentage",
-      description:
-        "The proportion of user base in this region compared to the total worldwide users",
+      title: "IP Mean",
+      description: "Average unique IP addresses per coordinate",
     },
     {
-      title: "User Mean",
-      description: "Average unique users per coordinate",
-    },
-    {
-      title: "User Median",
-      description: "Median number of unique users in the region",
+      title: "IP Median",
+      description: "Median number of unique IP addresses in the region",
     },
   ],
   visit: [
@@ -69,7 +68,7 @@ export const METRICS: METRICSTYPE = {
     {
       title: "Reading Activity",
       description:
-        "Total unique books read (duplicates counted among different readers).",
+        "Total unique records read (duplicates counted among different IPs).",
     },
     {
       title: "Relative Reading Activity",
@@ -78,11 +77,11 @@ export const METRICS: METRICSTYPE = {
     },
     {
       title: "Average Reading",
-      description: "Average unique books read per reader.",
+      description: "Average unique records read per IP.",
     },
     {
       title: "Median Reading",
-      description: "Median number of unique books read per reader.",
+      description: "Median number of unique records read per IP.",
     },
   ],
 };

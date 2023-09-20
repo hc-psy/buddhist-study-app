@@ -32,11 +32,11 @@ export default function BookNetwork({ bookName = "" }) {
   const [moreBooks, setMoreBooks] = useState<string[]>([]);
   const [methods, setMethods] = useState<MethodType[]>([
     {
-      name: "User-Book Interaction",
+      name: "IP-Record Interaction",
       value: "NMF",
     },
     {
-      name: "Transformers",
+      name: "TF (Not Recommended)",
       value: "Transformer",
     },
   ]);
@@ -116,7 +116,7 @@ export default function BookNetwork({ bookName = "" }) {
       <CardHeader>
         <div className="flex flex-row justify-between items-center mb-2">
           <CardTitle>
-            Explore Book Similarities: Interactive Network Graph
+            Explore Bibliographic Record Similarities: Interactive Network Graph
           </CardTitle>
           <Select onValueChange={onValueChange}>
             <SelectTrigger className="w-[200px]">
@@ -134,11 +134,14 @@ export default function BookNetwork({ bookName = "" }) {
           </Select>
         </div>
         <CardDescription>
-          Type a book title into the search box. Select your preferred method
-          for measuring similarity—either through User-Book Interaction or
-          Transformers. This will generate a network graph where the distance
-          between book nodes indicates their level of similarity. Double-click a
-          node (e.g. book) to add more similar books to your existing graph
+          Type a bibliographic record title into the search box. Select your
+          preferred method for measuring similarity—either through
+          IP-Bibliographic Record Interaction or Transformers (TF) (to examine
+          the similarity of superficial meanings of records titles). This will
+          generate a network graph where the distance between bibliographic
+          record nodes indicates their level of similarity. Double-click a node
+          (e.g., bibliographic record) to add more similar records to your
+          existing graph
         </CardDescription>
       </CardHeader>
       <CardContent>

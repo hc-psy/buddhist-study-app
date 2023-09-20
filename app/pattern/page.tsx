@@ -43,7 +43,7 @@ export default function PatternPage() {
                 <p className="text-sm text-muted-foreground my-2">{desc}</p>
               </div>
               <TabsList>
-                <TabsTrigger value="user">Site Users</TabsTrigger>
+                <TabsTrigger value="user">Site IPs</TabsTrigger>
                 <TabsTrigger value="visit">Browsing Activity</TabsTrigger>
                 <TabsTrigger value="book">Reading Activity</TabsTrigger>
               </TabsList>

@@ -21,7 +21,7 @@ export function SiteFooter() {
             rel="noreferrer"
             className="font-medium underline underline-offset-4"
           >
-            NTU Buddhist Library
+            NTU Digital Library of Buddhist Studies
           </a>
           . All rights reserved.
         </p>

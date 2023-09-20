@@ -1,5 +1,6 @@
 import { api } from "./api";
 import type { GeoFilterInfo } from "@/types/filter";
+import _ from "lodash";
 
 type GeoMetricsElementType = {
   lon: number;
@@ -58,6 +59,18 @@ export const geoApi = api.injectEndpoints({
         const jp_data = geo_metrics.filter((d) => d.lan === "jp");
         const en_data = geo_metrics.filter((d) => d.lan === "en");
         const tw_data = geo_metrics.filter((d) => d.lan === "tw");
+        // const sums = {
+        //   jp_total_click: _.sumBy(jp_data, "total_click"),
+        //   jp_total_user: _.sumBy(jp_data, "total_user"),
+        //   jp_total_book: _.sumBy(jp_data, "total_book"),
+        //   en_total_click: _.sumBy(en_data, "total_click"),
+        //   en_total_user: _.sumBy(en_data, "total_user"),
+        //   en_total_book: _.sumBy(en_data, "total_book"),
+        //   tw_total_click: _.sumBy(tw_data, "total_click"),
+        //   tw_total_user: _.sumBy(tw_data, "total_user"),
+        //   tw_total_book: _.sumBy(tw_data, "total_book"),
+        // };
+        // console.table(sums);
         const agg_data = aggregateData(geo_metrics);
         console.timeEnd("data processing");
 

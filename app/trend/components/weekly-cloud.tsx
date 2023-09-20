@@ -87,10 +87,10 @@ export default function WeeklyCloud() {
       <CardHeader>
         <CardTitle>Weekly Snapshot: Interactive Word Cloud</CardTitle>
         <CardDescription>
-          The most commonly browsed bibliographies for any given week with this
-          interactive word cloud. Use the selector to choose a week and see the
-          most prominent during that time. The size of each word indicates its
-          frequency
+          The most commonly browsed bibliographic records for any given week
+          with this interactive word cloud. Use the selector to choose a week
+          and see the most prominent during that time. The size of each record
+          indicates its frequency
         </CardDescription>
       </CardHeader>
       <CardContent>
